@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/untitled.dir/comparsion.cpp.o"
   "CMakeFiles/untitled.dir/condition_parser.cpp.o"
   "CMakeFiles/untitled.dir/condition_parser_test.cpp.o"
   "CMakeFiles/untitled.dir/main.cpp.o"

@@ -8,22 +8,22 @@ public:
         s.insert(date);
     }
 
-//    int RemoveIf(const auto predecate) {
-//        int count = 0;
-//        if (storage.count(date) > 0 && storage[date].count(event) > 0) {
-//            storage[date].erase(event);
-//            ++count;
-//        }
-//        return count;
-//    }
-//
-//    set<string> FindIf(const auto predecate) const {
-//        if (storage.count(date) > 0) {
-//            return storage.at(date);
-//        } else {
-//            return {};
-//        }
-//    }
+    int RemoveIf(function<bool(Date date, string str)> pr) {
+        int count = 0;
+        if (storage.count(date) > 0 && storage[date].count(event) > 0) {
+            storage[date].erase(event);
+            ++count;
+        }
+        return count;
+    }
+
+    set<pair<Date, string>> FindIf(function<bool(Date date, string str)> pr) const {
+        if (storage.count(date) > 0) {
+            return storage.at(date);
+        } else {
+            return {};
+        }
+    }
 
     void Print(ostream& os) const {
         for (const auto& item : storage) {
@@ -33,7 +33,7 @@ public:
         }
     }
 
-    pair<Date, string> Last(Date date){
+    pair<Date, string> Last(const Date& date){
         auto it = s.find(date);
         --it;
         return {*(it), *(--storage[*it].end())};

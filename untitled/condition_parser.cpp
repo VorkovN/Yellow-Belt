@@ -113,6 +113,7 @@ shared_ptr<Node> ParseCondition(istream& is) {
         top_node = make_shared<EmptyNode>();
     }
 
+
     if (current != tokens.end()) {
         throw logic_error("Unexpected tokens after condition");
     }

@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/vorkov/Workspace/C++/Yellow/untitled/comparsion.cpp" "/home/vorkov/Workspace/C++/Yellow/untitled/cmake-build-debug/CMakeFiles/untitled.dir/comparsion.cpp.o"
   "/home/vorkov/Workspace/C++/Yellow/untitled/condition_parser.cpp" "/home/vorkov/Workspace/C++/Yellow/untitled/cmake-build-debug/CMakeFiles/untitled.dir/condition_parser.cpp.o"
   "/home/vorkov/Workspace/C++/Yellow/untitled/condition_parser_test.cpp" "/home/vorkov/Workspace/C++/Yellow/untitled/cmake-build-debug/CMakeFiles/untitled.dir/condition_parser_test.cpp.o"
   "/home/vorkov/Workspace/C++/Yellow/untitled/main.cpp" "/home/vorkov/Workspace/C++/Yellow/untitled/cmake-build-debug/CMakeFiles/untitled.dir/main.cpp.o"

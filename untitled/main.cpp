@@ -21,7 +21,7 @@ void TestAll();
 int main() {
     TestAll();
 
-    /*Database db;
+    Database db;
 
     for (string line; getline(cin, line); ) {
         istringstream is(line);
@@ -63,7 +63,7 @@ int main() {
         } else {
             throw logic_error("Unknown command: " + command);
         }
-    }*/
+    }
 
     return 0;
 }

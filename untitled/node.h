@@ -6,48 +6,54 @@
 
 using namespace std;
 
+
 class Node {
-    virtual int Evaluate() const = 0;
+public:
+    [[nodiscard]] virtual bool Evaluate(const Date& date, const string& event) const = 0;
 };
+
 
 class EmptyNode: public Node {
 public:
     EmptyNode();
 
-    int Evaluate() const override;
+    [[nodiscard]] bool Evaluate(const Date& date, const string& event) const override;
 };
+
 
 class DateComparisonNode: public Node {
 public:
-    DateComparisonNode(Comparison com, Date date);
+    DateComparisonNode(const Comparison& com, const Date& date);
 
-    int Evaluate() const override;
+    [[nodiscard]] bool Evaluate(const Date& date, const string& event) const override;
 
 private:
     const Comparison com;
     const Date date;
 };
 
+
 class EventComparisonNode: public Node {
 public:
-    EventComparisonNode(Comparison com, string event);
+    EventComparisonNode(const Comparison& com, string  event);
 
-    int Evaluate() const override;
+    [[nodiscard]] bool Evaluate(const Date& date, const string& event) const override;
 
 private:
     const Comparison com;
     const string event;
 };
 
+
 class LogicalOperationNode: public Node {
 public:
-    LogicalOperationNode(LogicalOperation log_op, shared_ptr<Node> left, shared_ptr<Node> node);
+    LogicalOperationNode(const LogicalOperation& log_op, shared_ptr<Node> left, shared_ptr<Node> right);
 
-    int Evaluate() const override;
+    [[nodiscard]] bool Evaluate(const Date& date, const string& event) const override;
 
 private:
     const LogicalOperation& log_op;
     const shared_ptr<Node> left;
-    const shared_ptr<Node> node;
+    const shared_ptr<Node> right;
 
 };

@@ -1,120 +1,86 @@
 #include "token.h"
 
-#include "condition_parser.h"
-#include "token.h"
-
-#include <map>
+#include <stdexcept>
 
 using namespace std;
 
-template <class It> shared_ptr<Node> ParseComparison(It& current, It end) {
-    if (current == end) {
-        throw logic_error("Expected column name: date or event");
-    }
+vector<Token> Tokenize(istream& cl) {
+    vector<Token> tokens;
 
-    Token& column = *current;
-    if (column.type != TokenType::COLUMN) {
-        throw logic_error("Expected column name: date or event");
-    }
-    ++current;
-
-    if (current == end) {
-        throw logic_error("Expected comparison operation");
-    }
-
-    Token& op = *current;
-    if (op.type != TokenType::COMPARE_OP) {
-        throw logic_error("Expected comparison operation");
-    }
-    ++current;
-
-    if (current == end) {
-        throw logic_error("Expected right value of comparison");
-    }
-
-    Comparison cmp;
-    if (op.value == "<") {
-        cmp = Comparison::Less;
-    } else if (op.value == "<=") {
-        cmp = Comparison::LessOrEqual;
-    } else if (op.value == ">") {
-        cmp = Comparison::Greater;
-    } else if (op.value == ">=") {
-        cmp = Comparison::GreaterOrEqual;
-    } else if (op.value == "==") {
-        cmp = Comparison::Equal;
-    } else if (op.value == "!=") {
-        cmp = Comparison::NotEqual;
-    } else {
-        throw logic_error("Unknown comparison token: " + op.value);
-    }
-
-    const string& value = current->value;
-    ++current;
-
-    if (column.value == "date") {
-        istringstream is(value);
-        return make_shared<DateComparisonNode>(cmp, ParseDate(is));
-    } else {
-        return make_shared<EventComparisonNode>(cmp, value);
-    }
-}
-
-template <class It>
-shared_ptr<Node> ParseExpression(It& current, It end, unsigned precedence) {
-    if (current == end) {
-        return shared_ptr<Node>();
-    }
-
-    shared_ptr<Node> left;
-
-    if (current->type == TokenType::PAREN_LEFT) {
-        ++current; // consume '('
-        left = ParseExpression(current, end, 0u);
-        if (current == end || current->type != TokenType::PAREN_RIGHT) {
-            throw logic_error("Missing right paren");
+    char c;
+    while (cl >> c) {
+        if (isdigit(c)) {
+            string date(1, c);
+            for (int i = 0; i < 3; ++i) {
+                while (isdigit(cl.peek())) {
+                    date += cl.get();
+                }
+                if (i < 2) {
+                    date += cl.get(); // Consume '-'
+                }
+            }
+            tokens.push_back({date, TokenType::DATE});
+        } else if (c == '"') {
+            string event;
+            getline(cl, event, '"');
+            tokens.push_back({event, TokenType::EVENT});
+        } else if (c == 'd') {
+            if (cl.get() == 'a' && cl.get() == 't' && cl.get() == 'e') {
+                tokens.push_back({"date", TokenType::COLUMN});
+            } else {
+                throw logic_error("Unknown token");
+            }
+        } else if (c == 'e') {
+            if (cl.get() == 'v' && cl.get() == 'e' && cl.get() == 'n' &&
+                cl.get() == 't') {
+                tokens.push_back({"event", TokenType::COLUMN});
+            } else {
+                throw logic_error("Unknown token");
+            }
+        } else if (c == 'A') {
+            if (cl.get() == 'N' && cl.get() == 'D') {
+                tokens.push_back({"AND", TokenType::LOGICAL_OP});
+            } else {
+                throw logic_error("Unknown token");
+            }
+        } else if (c == 'O') {
+            if (cl.get() == 'R') {
+                tokens.push_back({"OR", TokenType::LOGICAL_OP});
+            } else {
+                throw logic_error("Unknown token");
+            }
+        } else if (c == '(') {
+            tokens.push_back({"(", TokenType::PAREN_LEFT});
+        } else if (c == ')') {
+            tokens.push_back({")", TokenType::PAREN_RIGHT});
+        } else if (c == '<') {
+            if (cl.peek() == '=') {
+                cl.get();
+                tokens.push_back({"<=", TokenType::COMPARE_OP});
+            } else {
+                tokens.push_back({"<", TokenType::COMPARE_OP});
+            }
+        } else if (c == '>') {
+            if (cl.peek() == '=') {
+                cl.get();
+                tokens.push_back({">=", TokenType::COMPARE_OP});
+            } else {
+                tokens.push_back({">", TokenType::COMPARE_OP});
+            }
+        } else if (c == '=') {
+            if (cl.get() == '=') {
+                tokens.push_back({"==", TokenType::COMPARE_OP});
+            } else {
+                throw logic_error("Unknown token");
+            }
+        } else if (c == '!') {
+            if (cl.get() == '=') {
+                tokens.push_back({"!=", TokenType::COMPARE_OP});
+            } else {
+                throw logic_error("Unknown token");
+            }
         }
-        ++current; // consume ')'
-    } else {
-        left = ParseComparison(current, end);
     }
 
-    const map<LogicalOperation, unsigned> precedences = {
-            {LogicalOperation::Or, 1}, {LogicalOperation::And, 2}
-    };
-
-    while (current != end && current->type != TokenType::PAREN_RIGHT) {
-        if (current->type != TokenType::LOGICAL_OP) {
-            throw logic_error("Expected logic operation");
-        }
-
-        const auto logical_operation = current->value == "AND" ? LogicalOperation::And
-                                                               : LogicalOperation::Or;
-        const auto current_precedence = precedences.at(logical_operation);
-        if (current_precedence <= precedence) {
-            break;
-        }
-
-        ++current; // consume op
-
-        left = make_shared<LogicalOperationNode>(logical_operation, left, ParseExpression(current, end, current_precedence));
-    }
-
-    return left;
-}
-
-shared_ptr<Node> ParseCondition(istream& is) {
-    auto tokens = Tokenize(is);
-    auto current = tokens.begin();
-    auto top_node = ParseExpression(current, tokens.end(), 0u);
-
-    if (!top_node) {
-        top_node = make_shared<EmptyNode>();
-    }
-
-    if (current != tokens.end()) {
-        throw logic_error("Unexpected tokens after condition");
-    }
-
-    return top_node;
+    return tokens;
 }
