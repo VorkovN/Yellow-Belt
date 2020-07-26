@@ -3,4 +3,4 @@ project(untitled)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(untitled main.cpp condition_parser_test.cpp condition_parser.cpp condition_parser.h token.cpp token.h node.cpp node.h compare.h)
+add_executable(untitled main.cpp condition_parser_test.cpp condition_parser.cpp token.cpp node.cpp date.cpp database.cpp)

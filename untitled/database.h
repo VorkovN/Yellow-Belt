@@ -8,29 +8,30 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include <algorithm>
 
-#include "date.h"
 #include "node.h"
 
 using namespace std;
 
+
 class Database {
 public:
-    void Add(const Date& date, const string& event);
+    void Add(const Date&, const string&);
 
-    int RemoveIf(function<bool(Date date, string str)> pr);
+    int RemoveIf(function<bool(Date, string)> pr);
 
-    set<pair<Date, string>> FindIf(function<bool(Date date, string str)> pr) const;
+    vector<pair<Date, string>> FindIf(function<bool(Date, string)> pr) const;
 
-    void Print(ostream& os) const;
+    void Print(ostream&) const;
 
-    pair<Date, string> Last(const Date& date);
+    pair<Date, string> Last(const Date&) const;
 
 private:
-    map<Date, set<string>> storage;
-    set<Date> s;
+    map<Date, vector<string>> storage_v;
+    map<Date, set<string>> storage_s;
 };
 
 
 
-ostream& operator<<(ostream& stream, const pair<Date, string>& p);
+ostream& operator<<(ostream&, const pair<Date, string>& p);

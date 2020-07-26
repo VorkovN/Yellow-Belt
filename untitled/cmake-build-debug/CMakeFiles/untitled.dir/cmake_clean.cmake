@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/untitled.dir/condition_parser.cpp.o"
   "CMakeFiles/untitled.dir/condition_parser_test.cpp.o"
+  "CMakeFiles/untitled.dir/database.cpp.o"
+  "CMakeFiles/untitled.dir/date.cpp.o"
   "CMakeFiles/untitled.dir/main.cpp.o"
   "CMakeFiles/untitled.dir/node.cpp.o"
   "CMakeFiles/untitled.dir/token.cpp.o"

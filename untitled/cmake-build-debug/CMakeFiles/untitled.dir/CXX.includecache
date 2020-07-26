@@ -6,15 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/vorkov/Workspace/C++/Yellow/untitled/condition_parser.cpp
-condition_parser.h
-/home/vorkov/Workspace/C++/Yellow/untitled/condition_parser.h
-condition_parser.h
-/home/vorkov/Workspace/C++/Yellow/untitled/condition_parser.h
-token.h
-/home/vorkov/Workspace/C++/Yellow/untitled/token.h
-map
--
+/home/vorkov/Workspace/C++/Yellow/untitled/compare.h
 
 /home/vorkov/Workspace/C++/Yellow/untitled/condition_parser.h
 node.h
@@ -24,13 +16,9 @@ memory
 iostream
 -
 
-/home/vorkov/Workspace/C++/Yellow/untitled/condition_parser_test.cpp
-condition_parser.h
-/home/vorkov/Workspace/C++/Yellow/untitled/condition_parser.h
-test_runner.h
-/home/vorkov/Workspace/C++/Yellow/untitled/test_runner.h
-sstream
--
+/home/vorkov/Workspace/C++/Yellow/untitled/database.cpp
+database.h
+/home/vorkov/Workspace/C++/Yellow/untitled/database.h
 
 /home/vorkov/Workspace/C++/Yellow/untitled/database.h
 iomanip
@@ -49,6 +37,12 @@ string
 -
 vector
 -
+functional
+-
+algorithm
+-
+node.h
+/home/vorkov/Workspace/C++/Yellow/untitled/node.h
 
 /home/vorkov/Workspace/C++/Yellow/untitled/date.h
 iomanip
@@ -69,14 +63,12 @@ vector
 -
 
 /home/vorkov/Workspace/C++/Yellow/untitled/main.cpp
-database.h
-/home/vorkov/Workspace/C++/Yellow/untitled/database.h
 date.h
 /home/vorkov/Workspace/C++/Yellow/untitled/date.h
+database.h
+/home/vorkov/Workspace/C++/Yellow/untitled/database.h
 condition_parser.h
 /home/vorkov/Workspace/C++/Yellow/untitled/condition_parser.h
-node.h
-/home/vorkov/Workspace/C++/Yellow/untitled/node.h
 test_runner.h
 /home/vorkov/Workspace/C++/Yellow/untitled/test_runner.h
 iostream
@@ -84,11 +76,15 @@ iostream
 stdexcept
 -
 
-/home/vorkov/Workspace/C++/Yellow/untitled/node.cpp
-node.h
 /home/vorkov/Workspace/C++/Yellow/untitled/node.h
-
-/home/vorkov/Workspace/C++/Yellow/untitled/node.h
+memory
+-
+iostream
+-
+date.h
+/home/vorkov/Workspace/C++/Yellow/untitled/date.h
+compare.h
+/home/vorkov/Workspace/C++/Yellow/untitled/compare.h
 
 /home/vorkov/Workspace/C++/Yellow/untitled/test_runner.h
 sstream
@@ -102,21 +98,5 @@ string
 map
 -
 set
--
-
-/home/vorkov/Workspace/C++/Yellow/untitled/token.cpp
-token.h
-/home/vorkov/Workspace/C++/Yellow/untitled/token.h
-condition_parser.h
-/home/vorkov/Workspace/C++/Yellow/untitled/condition_parser.h
-token.h
-/home/vorkov/Workspace/C++/Yellow/untitled/token.h
-map
--
-
-/home/vorkov/Workspace/C++/Yellow/untitled/token.h
-sstream
--
-vector
 -
 

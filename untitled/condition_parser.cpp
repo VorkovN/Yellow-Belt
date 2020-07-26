@@ -1,6 +1,4 @@
 #include "condition_parser.h"
-
-#include "condition_parser.h"
 #include "token.h"
 
 #include <map>
@@ -109,14 +107,8 @@ shared_ptr<Node> ParseCondition(istream& is) {
     auto current = tokens.begin();
     auto top_node = ParseExpression(current, tokens.end(), 0u);
 
-    if (!top_node) {
-        top_node = make_shared<EmptyNode>();
-    }
-
-
-    if (current != tokens.end()) {
-        throw logic_error("Unexpected tokens after condition");
-    }
+    if (!top_node) top_node = make_shared<EmptyNode>();
+    if (current != tokens.end()) throw logic_error("Unexpected tokens after condition");
 
     return top_node;
 }

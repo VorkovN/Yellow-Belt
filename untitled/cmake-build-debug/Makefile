@@ -177,6 +177,60 @@ condition_parser_test.cpp.s:
 	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/condition_parser_test.cpp.s
 .PHONY : condition_parser_test.cpp.s
 
+database.o: database.cpp.o
+
+.PHONY : database.o
+
+# target to build an object file
+database.cpp.o:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/database.cpp.o
+.PHONY : database.cpp.o
+
+database.i: database.cpp.i
+
+.PHONY : database.i
+
+# target to preprocess a source file
+database.cpp.i:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/database.cpp.i
+.PHONY : database.cpp.i
+
+database.s: database.cpp.s
+
+.PHONY : database.s
+
+# target to generate assembly for a file
+database.cpp.s:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/database.cpp.s
+.PHONY : database.cpp.s
+
+date.o: date.cpp.o
+
+.PHONY : date.o
+
+# target to build an object file
+date.cpp.o:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/date.cpp.o
+.PHONY : date.cpp.o
+
+date.i: date.cpp.i
+
+.PHONY : date.i
+
+# target to preprocess a source file
+date.cpp.i:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/date.cpp.i
+.PHONY : date.cpp.i
+
+date.s: date.cpp.s
+
+.PHONY : date.s
+
+# target to generate assembly for a file
+date.cpp.s:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/date.cpp.s
+.PHONY : date.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -273,6 +327,12 @@ help:
 	@echo "... condition_parser_test.o"
 	@echo "... condition_parser_test.i"
 	@echo "... condition_parser_test.s"
+	@echo "... database.o"
+	@echo "... database.i"
+	@echo "... database.s"
+	@echo "... date.o"
+	@echo "... date.i"
+	@echo "... date.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -12,7 +12,6 @@ using namespace std;
 
 class Date {
 public:
-    // конструктор выбрасывает исключение, если его аргументы некорректны
     Date(int new_year, int new_month, int new_day);
 
     int GetYear() const;
@@ -27,10 +26,11 @@ private:
     const int day;
 };
 
-Date ParseDate(istringstream& date_stream);
+Date ParseDate(istream&);
 
 bool operator<(const Date& lhs, const Date& rhs);
 bool operator>(const Date& lhs, const Date& rhs);
 bool operator!=(const Date& lhs, const Date& rhs);
 bool operator==(const Date& lhs, const Date& rhs);
 ostream& operator<<(ostream& stream, const Date& date);
+ostream& operator<<(ostream& stream, const vector<string>& v);

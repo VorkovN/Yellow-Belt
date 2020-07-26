@@ -1,7 +1,6 @@
-#include "database.h"
 #include "date.h"
+#include "database.h"
 #include "condition_parser.h"
-#include "node.h"
 #include "test_runner.h"
 
 #include <iostream>
@@ -10,10 +9,10 @@
 using namespace std;
 
 string ParseEvent(istream& is) {
-    string ev;
-    is >> ev;
-    cout << ev;
-    return ev;
+    string data;
+    is >> ws;
+    getline(is, data);
+    return data;
 }
 
 void TestAll();
